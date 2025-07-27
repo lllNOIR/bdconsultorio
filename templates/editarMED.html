@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Editar Medicos</h2>
+<form method="POST" >
+    <div class="mb-3">
+        <label>Identificación</label>
+        <input type="number" name="MEDidentificacion" class="form-control" value="{{ medico['MEDidentificacion'] }}" required>
+    </div>
+    <div class="mb-3">
+        <label>Nombres</label>
+        <input type="text" name="MEDnombres" class="form-control" value="{{ medico['MEDnombres'] }}" required>
+    </div>
+    <div class="mb-3">
+        <label>Apellidos</label>
+        <input type="text" name="MEDapellidos" class="form-control" value="{{ medico['MEDapellidos'] }}" required>
+    </div>
+    
+   
+    
+    <button type="submit" class="btn btn-success">Actualizar</button>
+</form>
+
+
+{% endblock %}

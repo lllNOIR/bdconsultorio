@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="mb-4">Agregar Médico</h2>
+
+<form method="POST" action="{{ url_for('registrarMED') }}" class="border p-4 rounded bg-light shadow-sm">
+    <div class="mb-3">
+        <label for="MEDidentificacion" class="form-label">Identificación</label>
+        <input type="number" name="MEDidentificacion" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="MEDnombres" class="form-label">Nombres</label>
+        <input type="text" name="MEDnombres" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="MEDapellidos" class="form-label">Apellidos</label>
+        <input type="text" name="MEDapellidos" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-success">Registrar</button>
+</form>
+
+<hr class="my-4">
+
+<h3>Médicos Registrados</h3>
+<table class="table table-striped table-bordered table-hover align-middle">
+    <thead class="table-dark text-center">
+        <tr>
+            <th>Identificación</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for medico in medicos %}
+        <tr>
+            <td>{{ medico['MEDidentificacion'] }}</td>
+            <td>{{ medico['MEDnombres'] }}</td>
+            <td>{{ medico['MEDapellidos'] }}</td>
+            <td>
+                <a href="{{ url_for('editaMED', MEDidentificacion=medico['MEDidentificacion']) }}" class="btn btn-warning btn-sm">Editar</a>
+                <form action="{{ url_for('eliminaMED', MEDidentificacion=medico['MEDidentificacion']) }}" method="post" style="display:inline-block;">
+                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% else %}
+        <tr><td colspan="4" class="text-center">No hay médicos registrados.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

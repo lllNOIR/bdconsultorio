@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>PACidentificacion</th>
+            <th>PACnombres</th>
+            <th>PACapellidos</th>
+            <th>PACfechaNacimiento</th>
+            <th>PACSexo</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for paciente in pacientes %}
+        <tr>
+            <td>{{ paciente['PACidentificacion'] }}</td>
+            <td>{{ paciente['PACnombres'] }}</td>
+            <td>{{ paciente['PACapellidos'] }}</td>
+            <td>{{ paciente['PACfechaNacimiento'] }}</td>
+            <td>{{ paciente['PACSexo'] }}</td>
+            
+        </tr>
+
+        <td>
+            <a href="{{ url_for('edita', id=paciente['PACidentificacion']) }}" class="btn btn-warning">Editar</a>
+            <form action="{{ url_for('elimina', id=paciente['PACidentificacion']) }}" method="post" style="display:inline-block;">
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+            </form>
+        </td>
+        
+        {% else %}
+        <tr><td colspan="5">No hay pacientes registrados.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

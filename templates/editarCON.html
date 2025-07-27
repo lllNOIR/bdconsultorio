@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Editar Consultorio</h2>
+<form method="POST" >
+    <div class="mb-3">
+        <label>Numero de Consultorio</label>
+        <input type="number" name="CONnumero" class="form-control" value="{{ consultorio['CONnumero'] }}" required>
+    </div>
+    <div class="mb-3">
+        <label>Nombre del Consultorio</label>
+        <input type="text" name="CONnombre" class="form-control" value="{{ consultorio['CONnombre'] }}" required>
+    </div>
+
+    
+   
+    
+    <button type="submit" class="btn btn-success">Actualizar</button>
+</form>
+
+
+{% endblock %}

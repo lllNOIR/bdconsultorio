@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="mb-4">Agregar Paciente</h2>
+
+<form method="POST" action="{{ url_for('paciente') }}" class="border p-4 rounded bg-light shadow-sm">
+    <div class="mb-3">
+        <label for="PACidentificacion" class="form-label">Identificación</label>
+        <input type="number" name="PACidentificacion" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="PACnombres" class="form-label">Nombre</label>
+        <input type="text" name="PACnombres" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="PACapellidos" class="form-label">Apellido</label>
+        <input type="text" name="PACapellidos" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="PACfechaNacimiento" class="form-label">Fecha de Nacimiento</label>
+        <input type="date" name="PACfechaNacimiento" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="PACSexo" class="form-label">Sexo</label>
+        <input type="text" name="PACSexo" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="CONnumero" class="form-label">Consultorio</label>
+        <select name="CONnumero" class="form-control" required>
+            {% for consultorio in consultorios %}
+            <option value="{{ consultorio['CONnumero'] }}">{{ consultorio['CONnombre'] }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="MEDidentificacion" class="form-label">Médico</label>
+        <select name="MEDidentificacion" class="form-control" required>
+            {% for medico in medicos %}
+            <option value="{{ medico['MEDidentificacion'] }}">{{ medico['MEDnombres'] }} {{ medico['MEDapellidos'] }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success">Guardar</button>
+</form>
+
+<hr class="my-4">
+
+<h3>Pacientes Registrados</h3>
+<table class="table table-striped table-bordered table-hover align-middle">
+    <thead class="table-dark text-center">
+        <tr>
+            <th>Identificación</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Fecha de Nacimiento</th>
+            <th>Sexo</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for paciente in pacientes %}
+        <tr>
+            <td>{{ paciente['PACidentificacion'] }}</td>
+            <td>{{ paciente['PACnombres'] }}</td>
+            <td>{{ paciente['PACapellidos'] }}</td>
+            <td>{{ paciente['PACfechaNacimiento'] }}</td>
+            <td>{{ paciente['PACSexo'] }}</td>
+        </tr>
+        <td>
+            <a href="{{ url_for('editaPAC', PACidentificacion=paciente['PACidentificacion']) }}" class="btn btn-warning">Editar</a>
+            <form action="{{ url_for('eliminaPAC', PACidentificacion=paciente['PACidentificacion']) }}" method="post" style="display:inline-block;">
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+            </form>
+        </td>
+
+        {% else %}
+        <tr>
+            <td colspan="5" class="text-center text-muted">No hay pacientes registrados.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

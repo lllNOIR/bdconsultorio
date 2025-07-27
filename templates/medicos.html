@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>MEDidentificacion</th>
+            <th>MEDnombres</th>
+            <th>MEDapellidos</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for medico in medicos %}
+        <tr>
+            <td>{{ medico['MEDidentificacion'] }}</td>
+            <td>{{ medico['MEDnombres'] }}</td>
+            <td>{{ medico['MEDapellidos'] }}</td>
+            
+        </tr>
+        <td>
+            <a href="{{ url_for('edita', id=medico['MEDidentificacion']) }}" class="btn btn-warning">Editar</a>
+            <form action="{{ url_for('elimina', id=medico['MEDidentificacion']) }}" method="post" style="display:inline-block;">
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+            </form>
+        </td>
+        {% else %}
+        <tr><td colspan="5">No hay Medico registrado.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

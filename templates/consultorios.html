@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>CONnumero</th>
+            <th>CONnombre</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for consultorio in consultorios %}
+        <tr>
+            <td>{{ consultorio['CONnumero'] }}</td>
+            <td>{{ consultorio['CONnombre'] }}</td>
+            
+        </tr>
+        <td>
+            <a href="{{ url_for('edita', id=consultorio['CONnumero']) }}" class="btn btn-warning">Editar</a>
+            <form action="{{ url_for('elimina', id=consultorio['CONnumero']) }}" method="post" style="display:inline-block;">
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+            </form>
+        </td>
+        {% else %}
+        <tr><td colspan="2">No hay consultorio registrado.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

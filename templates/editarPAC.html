@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Editar pacientess</h2>
+<form method="POST" >
+    <div class="mb-3">
+
+        <input type="number" name="PACidentificacion" class="form-control" value="{{ paciente['PACidentificacion'] }}" required>
+    </div>
+    <div class="mb-3">
+        <label>Nombre</label>
+        <input type="text" name="PACnombres" class="form-control" value="{{ paciente['PACnombres'] }}" required>
+    </div>
+    <div class="mb-3">
+        <label>Apellido</label>
+        <input type="text" name="PACapellidos" class="form-control" value="{{ paciente['PACapellidos'] }}" required>
+    </div>
+    <div class="mb-3">
+        <label>Fecha de Nacimiento</label>
+        <input type="date" name="PACfechaNacimiento" class="form-control" value="{{ paciente['PACfechaNacimiento'] }}" required>
+    </div>
+    <div class="mb-3">
+        <label>Sexo</label>
+        <select name="PACSexo" class="form-control" required>
+            <option value="M" {% if paciente['PACSexo'] == 'M' %}selected{% endif %}>Masculino</option>
+            <option value="F" {% if paciente['PACSexo'] == 'F' %}selected{% endif %}>Femenino</option>
+        </select>
+    </div>
+
+    
+   
+    
+    <button type="submit" class="btn btn-success">Actualizar</button>
+</form>
+
+
+{% endblock %}
